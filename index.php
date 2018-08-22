@@ -2,30 +2,46 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8" />
-        <title>Exercice6</title>
+        <title>p7exo6</title>
     </head>
     <body>
-        <?php
-        //On masque le formulaire après l'envoi des données
-  if(empty($_GET)){
-            ?>
-            <!--Création d'un formulaire qui redirige vers la page avec la méthode GET-->
-            <form action="index.php" method="get">
-                <select name="civility">
-                    <option value="Mr">Mr</option>
-                    <option value="Mrs">Mme</option>
-                </select>
-                <p><label for="firstName">Prénom :</label><input type="text" name="firstName" id="firstName" /><br/></p>
-                <p><label for="lastName">Nom :</label><input type="text" name="lastName" id="lastName" /></p>
-                <input type="submit" />
-            </form>
-                <?php
-            } else {
-                //on récupère et on écrit les valeurs
-    if(isset($_GET['civility']) && isset($_GET['firstName']) && isset($_GET['lastName'])){
-                    echo $_GET['civility'] . ' ' . $_GET['firstName'] . ' ' . $_GET['lastName'];
+        <p>
+            <?php
+            if (isset($_POST['submit'])) {
+                if (!empty($_POST['civility'])) {
+                    echo $_POST ['civility'];
+                } else {
+                    echo 'Veuillez entrer votre civilité';
                 }
-            }
-            ?>
-    </body>
+                if (!empty($_POST['lastname'])) {
+                    echo $_POST ['lastname'];
+                } else {
+                    echo 'Veuillez entrer votre nom';
+                }
+                if (!empty($_POST['firstname'])) {
+                    echo $_POST ['firstname'];
+                } else {
+                    echo 'Veuillez entrer votre prénom';
+                }
+            } else {
+                ?>
+            <form action="index.php" method="POST">
+                <label for="civility">Civilité</label>
+                <select name="civility" id="civility">
+                    <option selected disabled>Veuillez selectionner une option</option> 
+                    <option value="Mr">Mr</option>
+                    <option value="Mme">Mme</option>
+                </select>
+                <label for="lastname">Nom</label>
+                <input type="text" name="lastname" placeholder="Nom" />
+                <label for="firstname">Prénom</label>
+                <input type="text" name="firstname" placeholder="Prénom" />
+                <input type="submit" name="submit" value="soumettre" />
+            </form>
+            <?php
+        }/* fermeture du else après le form pour inserer le html, ainsi le form est visible ms une
+          fois les données entrée et validé il ne l est plus */
+        ?>
+    </p>
+</body>
 </html>
